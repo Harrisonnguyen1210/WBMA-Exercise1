@@ -14,10 +14,11 @@ export class HomePage {
     this.fetchArray();
   }
   picArray: Pic[] = [];
+  url = "http://media.mw.metropolia.fi/wbma/uploads/";
 
 
   fetchArray = () => {
-    this.http.get<Pic[]>('../../assets/json/test.json').subscribe((res: Pic[]) => {
+    this.http.get<Pic[]>('http://media.mw.metropolia.fi/wbma/media').subscribe((res: Pic[]) => {
       this.picArray = res;
       console.log(res);
     });
