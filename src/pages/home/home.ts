@@ -11,11 +11,11 @@ import { Pic } from '../../interface/pic';
 export class HomePage {
   // add this to HomePage component
   constructor(public navCtrl: NavController, private photoViewer: PhotoViewer, private http: HttpClient) {
-    this.fetchArray();
   }
   picArray: Pic[] = [];
-
-
+  ngOnInit(){
+    this.fetchArray();
+  }
   fetchArray = () => {
     this.http.get<Pic[]>('../../assets/json/test.json').subscribe((res: Pic[]) => {
       this.picArray = res;
