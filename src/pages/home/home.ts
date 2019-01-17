@@ -11,11 +11,13 @@ import { Pic } from '../../interface/pic';
 export class HomePage {
   // add this to HomePage component
   constructor(public navCtrl: NavController, private photoViewer: PhotoViewer, private http: HttpClient) {
-    this.fetchArray();
   }
   picArray: Pic[] = [];
   url = "http://media.mw.metropolia.fi/wbma/uploads/";
 
+  ngOnInit(){
+    this.fetchArray();
+  }
 
   fetchArray = () => {
     this.http.get<Pic[]>('http://media.mw.metropolia.fi/wbma/media').subscribe((res: Pic[]) => {
