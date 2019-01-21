@@ -7,6 +7,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { MediaProvider } from '../providers/media/media';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,9 @@ import { HomePage } from '../pages/home/home';
     StatusBar,
     SplashScreen,
     PhotoViewer,
-
+    MediaProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    MediaProvider,
   ],
 })
 export class AppModule {
