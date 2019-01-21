@@ -8,5 +8,5 @@ export interface Pic {
   media_type: string;
   mime_type: string;
   time_added: string;
-  thumbnail: string;
+  thumbnails: object;
 }

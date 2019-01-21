@@ -16,7 +16,7 @@ export class HomePage {
   picArray: Pic[] = [];
   url = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-  ionViewDidLoad() {
+  ionViewCanEnter() {
     this.getAllFiles();
   }
 
@@ -25,15 +25,15 @@ export class HomePage {
     subscribe((res: Pic[]) => {
       this.picArray = res;
       this.picArray.map(item => {
-        item.thumbnail = item.filename.substring(0,
-          item.filename.length - 4) + '-tn160.png';
-      });
+        this.mediaProvider.getSingleMedia(item.file_id).subscribe((singleFile: Pic) => {
 
-      // Another way to do map
-      // this.picArray = res.map(item => {
-      //   item.thumbnail = item.filename.substring(0,item.filename.length - 4) + '-tn160.png';
-      //   return item;
-      // })
+          console.log(singleFile);
+          item.thumbnails = singleFile.thumbnails;
+        })
+      });
+      console.log('lololo');
+
+      console.log(this.picArray);
     });
   };
 

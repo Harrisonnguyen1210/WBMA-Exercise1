@@ -19,4 +19,8 @@ export class MediaProvider {
   getAllMedia() {
     return this.http.get<Pic[]>('http://media.mw.metropolia.fi/wbma/media')
   }
+
+  getSingleMedia = (id) => {
+    return this.http.get<Pic>(`http://media.mw.metropolia.fi/wbma/media/${id}`)
+  };
 }
