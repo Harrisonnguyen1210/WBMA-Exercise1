@@ -16,24 +16,26 @@ export class HomePage {
   picArray: Pic[] = [];
   url = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-  ionViewCanEnter() {
+  ionViewDidLoad() {
     this.getAllFiles();
   }
 
   getAllFiles = () => {
     this.mediaProvider.getAllMedia().
     subscribe((res: Pic[]) => {
+      // Another way if you dont want to check the existence of item.thumbnails in home.html
+      // res.forEach(item => {
+      //   this.mediaProvider.getSingleMedia(item.file_id).subscribe((file: Pic) => {
+      //     this.picArray.push(file);
+      //   })
+      // })
+
       this.picArray = res;
       this.picArray.map(item => {
         this.mediaProvider.getSingleMedia(item.file_id).subscribe((singleFile: Pic) => {
-
-          console.log(singleFile);
           item.thumbnails = singleFile.thumbnails;
         })
       });
-      console.log('lololo');
-
-      console.log(this.picArray);
     });
   };
 
