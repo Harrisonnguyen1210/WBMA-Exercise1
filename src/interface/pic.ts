@@ -10,3 +10,23 @@ export interface Pic {
   time_added: string;
   thumbnails: object;
 }
+
+export interface User {
+  user_id?: number,
+  username: string,
+  password?: string,
+  email?: string,
+  full_name?: string,
+  time_created?: Date
+}
+
+export interface LogInResponse {
+  message: string,
+  token: string,
+  user: User
+}
+
+export interface CheckExistResponse {
+  username: string,
+  available: boolean
+}

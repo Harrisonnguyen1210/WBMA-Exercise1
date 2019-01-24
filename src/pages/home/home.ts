@@ -18,6 +18,11 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.getAllFiles();
+    if(localStorage.getItem('token')) {
+      this.mediaProvider.isLoggedIn = true;
+      this.navCtrl.parent.select(0);
+      console.log('has token');
+    }
   }
 
   getAllFiles = () => {

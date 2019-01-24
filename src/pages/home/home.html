@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Home
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,7 +10,7 @@
   <ion-list>
     <ion-item *ngFor="let item of picArray">
       <ion-thumbnail item-start>
-        <img *ngIf="item.thumbnails" [src]="url+item.thumbnails['160']">
+        <img *ngIf="item.thumbnails" [src]="url+item.thumbnails.w160">
       </ion-thumbnail>
       <h2>{{item.title}}</h2>
       <p>{{item.description}}</p>

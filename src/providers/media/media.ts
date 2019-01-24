@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pic } from '../../interface/pic';
+import { LogInResponse, Pic, User, CheckExistResponse } from '../../interface/pic';
 
 /*
   Generated class for the MediaProvider provider.
@@ -16,11 +16,36 @@ export class MediaProvider {
     console.log('Hello MediaProvider Provider');
   }
 
+  isLoggedIn = false;
+
+
   getAllMedia() {
-    return this.http.get<Pic[]>('http://media.mw.metropolia.fi/wbma/media')
+    return this.http.get<Pic[]>('http://media.mw.metropolia.fi/wbma/media');
   }
 
   getSingleMedia = (id) => {
-    return this.http.get<Pic>(`http://media.mw.metropolia.fi/wbma/media/${id}`)
+    return this.http.get<Pic>(`http://media.mw.metropolia.fi/wbma/media/${id}`);
   };
+
+  checkIfUserExists = (user: User) => {
+    return this.http.get<CheckExistResponse>('http://media.mw.metropolia.fi/wbma/users/username/'+user.username);
+  };
+
+  logInUser = (user: User)  => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+    };
+      return this.http.post<LogInResponse>('http://media.mw.metropolia.fi/wbma/login', user, httpOptions);
+  };
+
+  registerUser = (user: User) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+    };
+    return this.http.post<LogInResponse>('http://media.mw.metropolia.fi/wbma/users', user, httpOptions);
+  }
 }
