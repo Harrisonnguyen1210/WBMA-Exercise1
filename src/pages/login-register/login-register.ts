@@ -27,6 +27,10 @@ export class LoginRegisterPage {
       this.mediaProvider.isLoggedIn = true;
       console.log(res);
       localStorage.setItem('token', res.token);
+      localStorage.setItem('username', res.user.email);
+      localStorage.setItem('email', res.user.username);
+      localStorage.setItem('user_id', String(res.user.user_id));
+      console.log(localStorage.getItem('user_id'));
       this.navCtrl.parent.select(0);
     }, error => {
       this.showAlert();

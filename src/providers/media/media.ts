@@ -47,5 +47,9 @@ export class MediaProvider {
       })
     };
     return this.http.post<LogInResponse>('http://media.mw.metropolia.fi/wbma/users', user, httpOptions);
-  }
+  };
+
+  getUserAvatar = () => {
+    return this.http.get<Pic[]>('http://media.mw.metropolia.fi/wbma/tags/profile');
+  };
 }

@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Pic } from '../../interface/pic';
 import { MediaProvider } from '../../providers/media/media';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'page-home',
@@ -10,15 +11,17 @@ import { MediaProvider } from '../../providers/media/media';
 })
 export class HomePage {
   // add this to HomePage component
-  constructor(public navCtrl: NavController, private photoViewer: PhotoViewer, private mediaProvider: MediaProvider) {
+  constructor(
+    public navCtrl: NavController, private photoViewer: PhotoViewer,
+    private mediaProvider: MediaProvider) {
   }
 
-  picArray: Pic[] = [];
-  url = 'http://media.mw.metropolia.fi/wbma/uploads/';
+  picArray: Observable<Pic[]>;
+  url = 'https://media.mw.metropolia.fi/wbma/uploads/';
 
-  ionViewDidLoad() {
+  ngOnInit() {
     this.getAllFiles();
-    if(localStorage.getItem('token')) {
+    if (localStorage.getItem('token')) {
       this.mediaProvider.isLoggedIn = true;
       this.navCtrl.parent.select(0);
       console.log('has token');
@@ -26,22 +29,7 @@ export class HomePage {
   }
 
   getAllFiles = () => {
-    this.mediaProvider.getAllMedia().
-    subscribe((res: Pic[]) => {
-      // Another way if you dont want to check the existence of item.thumbnails in home.html
-      // res.forEach(item => {
-      //   this.mediaProvider.getSingleMedia(item.file_id).subscribe((file: Pic) => {
-      //     this.picArray.push(file);
-      //   })
-      // })
-
-      this.picArray = res;
-      this.picArray.map(item => {
-        this.mediaProvider.getSingleMedia(item.file_id).subscribe((singleFile: Pic) => {
-          item.thumbnails = singleFile.thumbnails;
-        })
-      });
-    });
+    this.picArray = this.mediaProvider.getAllMedia();
   };
 
   openPic = (imageSource) => {

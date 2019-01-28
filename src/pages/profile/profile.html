@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Logout</ion-title>
+    <ion-title>Profile</ion-title>
     <button ion-button (click)="logout()">Logout</button>
 
   </ion-navbar>
@@ -16,5 +16,8 @@
 
 
 <ion-content padding>
-
+  <img *ngIf="avatar" [src]="url + avatar.filename">
+  <p>{{username}}</p>
+  <p>{{email}}</p>
 </ion-content>
+

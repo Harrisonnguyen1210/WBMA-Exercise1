@@ -9,6 +9,8 @@ export interface Pic {
   mime_type: string;
   time_added: string;
   thumbnails: object;
+  screenshot? : string;
+  tag? : string;
 }
 
 export interface User {
