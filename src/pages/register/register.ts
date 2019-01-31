@@ -12,7 +12,8 @@ export class RegisterPage {
 
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
-    private mediaProvider: MediaProvider, private alertController: AlertController) {
+    private mediaProvider: MediaProvider,
+    private alertController: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -23,29 +24,29 @@ export class RegisterPage {
     username: '',
     password: '',
     email: '',
+    re_password: '',
   };
 
+  confirmPass = false;
+
   register = () => {
-    this.mediaProvider.checkIfUserExists(this.user).subscribe(res => {
-      if (!res.available) {
-        this.showAlert('Username already registered, try another username');
-      } else {
-        this.mediaProvider.registerUser(this.user).
-          subscribe((res: LogInResponse) => {
-            console.log(res);
-            this.mediaProvider.isLoggedIn = true;
-            this.navCtrl.pop();
-            this.navCtrl.parent.select(0);
-            this.mediaProvider.logInUser(this.user).subscribe((res: LogInResponse) => {
+    if(this.mediaProvider.isRegistered)this.showAlert('Username is registered, please try again');
+    else if (this.confirmPass) this.showAlert('Password doesn\'t match, please try again');
+    else {
+      this.mediaProvider.registerUser(this.user).
+        subscribe((res: LogInResponse) => {
+          console.log(res);
+          this.mediaProvider.isLoggedIn = true;
+          this.navCtrl.pop();
+          this.navCtrl.parent.select(0);
+          this.mediaProvider.logInUser(this.user).
+            subscribe((res: LogInResponse) => {
               localStorage.setItem('token', res.token);
-            })
-          }, error => {
-            console.log(error);
-          });
-      }
-    }, err => {
-      this.showAlert('Wrong username or password, try again');
-    });
+            });
+        }, error => {
+          console.log(error);
+        });
+    }
   };
 
   showAlert = (notice: string) => {
@@ -55,5 +56,16 @@ export class RegisterPage {
       buttons: ['OK'],
     });
     alert.present();
+  };
+
+  checkUsername = () => {
+    this.mediaProvider.checkIfUserExists(this.user).subscribe(res => {
+      (!res.available) ? this.mediaProvider.isRegistered = true : this.mediaProvider.isRegistered = false
+    });
+  };
+
+  checkConfirmPass = () => {
+    (this.user.password === this.user.re_password) ? this.confirmPass = false : this.confirmPass = true;
+    console.log(this.confirmPass);
   };
 }

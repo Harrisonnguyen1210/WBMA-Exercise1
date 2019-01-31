@@ -17,6 +17,7 @@ export class MediaProvider {
   }
 
   isLoggedIn = false;
+  isRegistered = false;
 
 
   getAllMedia() {

@@ -17,6 +17,7 @@ export interface User {
   user_id?: number,
   username: string,
   password?: string,
+  re_password?: string,
   email?: string,
   full_name?: string,
   time_created?: Date

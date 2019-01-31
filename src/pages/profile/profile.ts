@@ -34,11 +34,6 @@ export class ProfilePage {
           console.log(this.avatar);
         }
       })
-      // this.avatar = res.filter((avatar) =>{
-      //   if(avatar.user_id === parseInt(localStorage.getItem('user_id')))
-      //     return avatar
-      //   }
-      // );
     })
   };
 

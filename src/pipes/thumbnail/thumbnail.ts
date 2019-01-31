@@ -17,32 +17,6 @@ export class ThumbnailPipe implements PipeTransform {
 
   transform(id: number, ...args) {
 
-    // if (id !== this.cachedId) {
-    //   console.log('id lol', id);
-    //   this.cachedId = id;
-    //   this.mediaProvider.getSingleMedia(id).subscribe((res: Pic) => {
-    //       switch (args[0]) {
-    //         case 'small':
-    //           this.thumbnail = res.thumbnails['w160'];
-    //           break;
-    //         case 'medium':
-    //           this.thumbnail = res.thumbnails['w320'];
-    //           break;
-    //         case 'large':
-    //           this.thumbnail = res.thumbnails['w640'];
-    //           break;
-    //         case 'screenshot':
-    //           this.thumbnail = res.screenshot;
-    //           break;
-    //         default:
-    //           this.thumbnail = res.thumbnails['w160'];
-    //
-    //       }
-    //     }
-    //   );
-    //   return this.thumbnail;
-    // }
-
     return new Promise((resolve, reject) => {
         this.mediaProvider.getSingleMedia(id).subscribe((response: Pic) => {
             switch (args[0]) {

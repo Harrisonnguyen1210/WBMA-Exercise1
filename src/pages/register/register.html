@@ -12,8 +12,12 @@
         <ion-col>
           <ion-list inset>
 
+            <ion-item *ngIf="mediaProvider.isRegistered">
+              <p style="color: #f53d3d">Username is registered</p>
+            </ion-item>
+
             <ion-item>
-              <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="user.username" required></ion-input>
+              <ion-input (ionBlur)="checkUsername()" type="text" placeholder="Username" name="username" [(ngModel)]="user.username" required></ion-input>
             </ion-item>
 
             <ion-item>
@@ -22,6 +26,14 @@
 
             <ion-item>
               <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="user.password" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input (ionBlur)="checkConfirmPass()" type="password" placeholder="Reenter Password" name="re_password" [(ngModel)]="user.re_password" required></ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="confirmPass">
+              <p style="color: #f53d3d">Password doesn't match</p>
             </ion-item>
 
           </ion-list>
