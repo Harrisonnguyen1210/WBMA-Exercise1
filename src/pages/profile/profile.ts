@@ -27,11 +27,11 @@ export class ProfilePage {
   requestUserInfo = () => {
     this.username = localStorage.getItem('username');
     this.email = localStorage.getItem('email');
+    console.log(this.username, this.email);
     this.mediaProvider.getUserAvatar().subscribe((res: Pic[]) => {
       res.forEach(avatar => {
         if(avatar.user_id.toString() === localStorage.getItem('user_id')){
           this.avatar = avatar;
-          console.log(this.avatar);
         }
       })
     })

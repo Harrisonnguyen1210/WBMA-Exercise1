@@ -16,20 +16,32 @@
               <p style="color: #f53d3d">Username is registered</p>
             </ion-item>
 
+            <ion-item *ngIf="validUsername">
+              <p style="color: #f53d3d">Username must have a least 5 characters</p>
+            </ion-item>
+
             <ion-item>
               <ion-input (ionBlur)="checkUsername()" type="text" placeholder="Username" name="username" [(ngModel)]="user.username" required></ion-input>
             </ion-item>
 
-            <ion-item>
-              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="user.email" required></ion-input>
+            <ion-item *ngIf="validEmail">
+              <p style="color: #f53d3d">Email not valid, try again</p>
             </ion-item>
 
             <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="user.password" required></ion-input>
+              <ion-input (ionBlur)="checkEmail()" type="text" placeholder="Email" name="email" [(ngModel)]="user.email" required></ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="validPass">
+              <p style="color: #f53d3d">Password must have at least 5 characters,<br> one letter and one number</p>
             </ion-item>
 
             <ion-item>
-              <ion-input (ionBlur)="checkConfirmPass()" type="password" placeholder="Reenter Password" name="re_password" [(ngModel)]="user.re_password" required></ion-input>
+              <ion-input (ionBlur)="checkPassword()" type="password" placeholder="Password" name="password" [(ngModel)]="user.password" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input (ionBlur)="checkConfirmPass()" type="password" placeholder="Reenter Password" name="re_password" [(ngModel)]="re_password" required></ion-input>
             </ion-item>
 
             <ion-item *ngIf="confirmPass">
