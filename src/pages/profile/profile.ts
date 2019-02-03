@@ -14,7 +14,7 @@ export class ProfilePage {
     public mediaProvider: MediaProvider) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     if (this.mediaProvider.isLoggedIn === true) {
       this.requestUserInfo();
     }
