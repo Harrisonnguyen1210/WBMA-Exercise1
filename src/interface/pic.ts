@@ -33,3 +33,8 @@ export interface CheckExistResponse {
   username: string,
   available: boolean
 }
+
+export interface UploadResponse {
+  message: string,
+  file_id: number
+}

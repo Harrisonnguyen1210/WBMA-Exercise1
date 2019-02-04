@@ -1,6 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LogInResponse, Pic, User, CheckExistResponse } from '../../interface/pic';
+import {
+  LogInResponse,
+  Pic,
+  User,
+  CheckExistResponse,
+  UploadResponse,
+} from '../../interface/pic';
 
 /*
   Generated class for the MediaProvider provider.
@@ -52,5 +58,14 @@ export class MediaProvider {
 
   getUserAvatar = () => {
     return this.http.get<Pic[]>('http://media.mw.metropolia.fi/wbma/tags/profile');
+  };
+
+  upload = (data: any) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token')
+      })
+    };
+    return this.http.post<UploadResponse>('http://media.mw.metropolia.fi/wbma/media', data, httpOptions)
   };
 }

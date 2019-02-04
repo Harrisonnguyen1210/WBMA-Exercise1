@@ -13,6 +13,7 @@ import { MenuPage } from '../pages/menu/menu';
 import { MediaProvider } from '../providers/media/media';
 import { RegisterPage } from '../pages/register/register';
 import { PipesModule } from '../pipes/pipes.module';
+import { UploadPage } from '../pages/upload/upload';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PipesModule } from '../pipes/pipes.module';
     ProfilePage,
     MenuPage,
     RegisterPage,
+    UploadPage
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { PipesModule } from '../pipes/pipes.module';
     ProfilePage,
     MenuPage,
     RegisterPage,
+    UploadPage
   ],
   providers: [
     StatusBar,

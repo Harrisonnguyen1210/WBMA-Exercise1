@@ -4,6 +4,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Pic } from '../../interface/pic';
 import { MediaProvider } from '../../providers/media/media';
 import { Observable } from 'rxjs';
+import { UploadPage } from '../upload/upload';
 
 @Component({
   selector: 'page-home',
@@ -13,13 +14,13 @@ export class HomePage {
   // add this to HomePage component
   constructor(
     public navCtrl: NavController, private photoViewer: PhotoViewer,
-    private mediaProvider: MediaProvider) {
+    private mediaProvider: MediaProvider,) {
   }
 
   picArray: Observable<Pic[]>;
   url = 'https://media.mw.metropolia.fi/wbma/uploads/';
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.getAllFiles();
     if (localStorage.getItem('token')) {
       this.mediaProvider.isLoggedIn = true;
@@ -34,5 +35,9 @@ export class HomePage {
 
   openPic = (imageSource) => {
     this.photoViewer.show(imageSource);
+  };
+
+  upload = () => {
+    this.navCtrl.push(UploadPage);
   };
 }
