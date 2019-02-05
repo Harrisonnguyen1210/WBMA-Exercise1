@@ -11,26 +11,28 @@ export class UploadPage {
 
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
-    public mediaProvider: MediaProvider, public loadingCtrl: LoadingController) {
+    public mediaProvider: MediaProvider,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UploadPage');
+    setTimeout(() => {
+      console.log(this.brightness);
+    }, 5000);
   }
 
   fileData = '';
   file: File;
   title: string;
   description: string;
-  brightness;
-  thermometer;
-  water;
-  contrast;
-
+  brightness = 100;
+  thermometer = 100;
+  water = 0;
+  contrast = 100;
 
   presentLoadingDefault() {
     const loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: 'Please wait...',
     });
 
     loading.present().catch();
@@ -44,7 +46,8 @@ export class UploadPage {
   onUpload = () => {
     const formData = new FormData();
     formData.append('title', this.title);
-    formData.append('description', this.description);
+    formData.append('description', this.description +
+      `### ${this.brightness} ### ${this.thermometer} ### ${this.water} ### ${this.contrast}`);
     formData.append('file', this.file);
     this.mediaProvider.upload(formData).subscribe((res) => {
       this.presentLoadingDefault();
@@ -62,12 +65,12 @@ export class UploadPage {
     reader.onloadend = () => {
       this.fileData = reader.result;
     };
-    if(this.file.type.includes('video')) {
-      this.fileData = 'https://dataself.com/wp-content/uploads/2018/08/Sage-X3-video-placeholder.jpg'
-    }else if(this.file.type.includes('audio')) {
-      this.fileData = 'https://marketplace.bantu.my/assets/audio-placeholder-304b4c582a7bc94e6bfeefa1cde5582dd56ab86affa79b6cc9d70e3027926ee8.png'
+    if (this.file.type.includes('video')) {
+      this.fileData = 'https://dataself.com/wp-content/uploads/2018/08/Sage-X3-video-placeholder.jpg';
+    } else if (this.file.type.includes('audio')) {
+      this.fileData = 'https://marketplace.bantu.my/assets/audio-placeholder-304b4c582a7bc94e6bfeefa1cde5582dd56ab86affa79b6cc9d70e3027926ee8.png';
     }
-    else{
+    else {
       reader.readAsDataURL(this.file);
     }
   };
