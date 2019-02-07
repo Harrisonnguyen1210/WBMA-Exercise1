@@ -28,8 +28,7 @@
           </ion-item>
 
           <ion-item>
-            <ion-label>Upload your file</ion-label>
-            <ion-input type="file" (change)="handleChange($event)" name="file" required></ion-input>
+            <button ion-button type="button" (click)="onChoose()" (change)="handleChange($event)">Choose file</button>
           </ion-item>
 
         </ion-list>
@@ -41,6 +40,9 @@
       <ion-col>
         <button ion-button type="submit">Upload</button>
       </ion-col>
+      <ion-col>
+        <button ion-button type="button" (click)="reset()" >Reset</button>
+      </ion-col>
     </ion-row>
 
   </form>
@@ -51,7 +53,7 @@
          [src]="fileData">
   </ion-card>
 
-  <ion-list>
+  <ion-list *ngIf="showFilter">
 
     <ion-item>
       <ion-range min="0" max="500" step="10" [(ngModel)]="brightness">

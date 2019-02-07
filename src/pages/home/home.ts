@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Pic } from '../../interface/pic';
 import { MediaProvider } from '../../providers/media/media';
 import { Observable } from 'rxjs';
@@ -13,8 +12,7 @@ import { UploadPage } from '../upload/upload';
 export class HomePage {
   // add this to HomePage component
   constructor(
-    public navCtrl: NavController, private photoViewer: PhotoViewer,
-    private mediaProvider: MediaProvider,) {
+    public navCtrl: NavController, private mediaProvider: MediaProvider,) {
   }
 
   picArray: Observable<Pic[]>;
@@ -31,10 +29,6 @@ export class HomePage {
 
   getAllFiles = () => {
     this.picArray = this.mediaProvider.getAllMedia();
-  };
-
-  openPic = (imageSource) => {
-    this.photoViewer.show(imageSource);
   };
 
   upload = () => {

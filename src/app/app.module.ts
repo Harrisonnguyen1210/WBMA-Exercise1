@@ -3,7 +3,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -14,6 +13,7 @@ import { MediaProvider } from '../providers/media/media';
 import { RegisterPage } from '../pages/register/register';
 import { PipesModule } from '../pipes/pipes.module';
 import { UploadPage } from '../pages/upload/upload';
+import { Chooser } from '@ionic-native/chooser';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { UploadPage } from '../pages/upload/upload';
     ProfilePage,
     MenuPage,
     RegisterPage,
-    UploadPage
+    UploadPage,
   ],
   imports: [
     BrowserModule,
@@ -39,13 +39,13 @@ import { UploadPage } from '../pages/upload/upload';
     ProfilePage,
     MenuPage,
     RegisterPage,
-    UploadPage
+    UploadPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    PhotoViewer,
     MediaProvider,
+    Chooser,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     MediaProvider,
   ],
