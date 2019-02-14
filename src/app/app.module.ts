@@ -14,6 +14,10 @@ import { RegisterPage } from '../pages/register/register';
 import { PipesModule } from '../pipes/pipes.module';
 import { UploadPage } from '../pages/upload/upload';
 import { Chooser } from '@ionic-native/chooser';
+import { PlayerPage } from '../pages/player/player';
+import { PinchZoomModule } from 'ngx-pinch-zoom';
+import { MyFilePage } from '../pages/myfile/myfile';
+import { ModifyPage } from '../pages/modify/modify';
 
 @NgModule({
   declarations: [
@@ -24,11 +28,15 @@ import { Chooser } from '@ionic-native/chooser';
     MenuPage,
     RegisterPage,
     UploadPage,
+    PlayerPage,
+    MyFilePage,
+    ModifyPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     PipesModule,
+    PinchZoomModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -40,6 +48,9 @@ import { Chooser } from '@ionic-native/chooser';
     MenuPage,
     RegisterPage,
     UploadPage,
+    PlayerPage,
+    MyFilePage,
+    ModifyPage
   ],
   providers: [
     StatusBar,

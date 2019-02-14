@@ -7,8 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Profile</ion-title>
-    <button ion-button (click)="logout()">Logout</button>
+    <ion-item no-lines>
+      <ion-title item-start>Profile</ion-title>
+      <button ion-button item-end (click)="logout()">Logout</button>
+    </ion-item>
   </ion-navbar>
 
 </ion-header>
@@ -18,5 +20,8 @@
   <img *ngIf="avatar" [src]="url + avatar.filename">
   <p>{{username}}</p>
   <p>{{email}}</p>
+  <ion-item>
+    <button ion-button (click)="goToMyFiles()">My Files</button>
+  </ion-item>
 </ion-content>
 

@@ -26,9 +26,19 @@ export class MediaProvider {
   isRegistered = false;
 
 
-  getAllMedia() {
+  getAllMedia = () => {
     return this.http.get<Pic[]>('http://media.mw.metropolia.fi/wbma/media');
-  }
+  };
+
+  getUserFiles = () => {
+    const user_id = localStorage.getItem('user_id');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token')
+      })
+    };
+    return this.http.get<Pic[]>('http://media.mw.metropolia.fi/wbma/media/user/'+user_id, httpOptions);
+  };
 
   getSingleMedia = (id) => {
     return this.http.get<Pic>(`http://media.mw.metropolia.fi/wbma/media/${id}`);
@@ -67,5 +77,32 @@ export class MediaProvider {
       })
     };
     return this.http.post<UploadResponse>('http://media.mw.metropolia.fi/wbma/media', data, httpOptions)
+  };
+
+  getUserInfo = (user_id) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token')
+      })
+    };
+    return this.http.get<Pic>(`http://media.mw.metropolia.fi/wbma/users/${user_id}`, httpOptions);
+  };
+
+  deleteMedia = (file_id) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token')
+      })
+    };
+    return this.http.delete<Pic>(`http://media.mw.metropolia.fi/wbma/media/${file_id}`, httpOptions);
+  };
+
+  updateMedia = (file_id, json) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token')
+      })
+    };
+    return this.http.put<String>(`http://media.mw.metropolia.fi/wbma/media/${file_id}`, json, httpOptions);
   };
 }

@@ -1,0 +1,39 @@
+<!--
+  Generated template for the PlayerPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Media Info</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="myItem.media_type === 'image'">
+    <pinch-zoom>
+      <img [src]="url+myItem.filename"
+           [ngStyle]="{
+      'filter': 'brightness(' + filter.brightness/100 + ') contrast(' + filter.contrast/100 +') saturate(' + filter.saturation/100 +') sepia(' + filter.sepia + ')'}">
+    </pinch-zoom>
+  </div>
+  <div *ngIf="myItem.media_type === 'video'">
+    <video controls>
+      <source [src]="url+myItem.filename" type="video/mp4">
+    </video>
+  </div>
+  <div *ngIf="myItem.media_type === 'audio'">
+    <audio controls>
+      <source [src]="url+myItem.filename" type="audio/mpeg">
+    </audio>
+  </div>
+  <ion-title *ngIf="myItem">
+    {{myItem.title}}
+  </ion-title>
+  <p *ngIf="user">Uploaded by: {{user.username}}</p>
+  <p *ngIf="myItem">{{myItem.description | description}}</p>
+</ion-content>

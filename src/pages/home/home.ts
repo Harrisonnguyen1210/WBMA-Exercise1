@@ -4,6 +4,7 @@ import { Pic } from '../../interface/pic';
 import { MediaProvider } from '../../providers/media/media';
 import { Observable } from 'rxjs';
 import { UploadPage } from '../upload/upload';
+import { PlayerPage } from '../player/player';
 
 @Component({
   selector: 'page-home',
@@ -12,11 +13,10 @@ import { UploadPage } from '../upload/upload';
 export class HomePage {
   // add this to HomePage component
   constructor(
-    public navCtrl: NavController, private mediaProvider: MediaProvider,) {
+    public navCtrl: NavController, private mediaProvider: MediaProvider) {
   }
 
   picArray: Observable<Pic[]>;
-  url = 'https://media.mw.metropolia.fi/wbma/uploads/';
 
   ionViewDidEnter() {
     this.getAllFiles();
@@ -32,6 +32,13 @@ export class HomePage {
   };
 
   upload = () => {
-    this.navCtrl.push(UploadPage);
+    this.navCtrl.push(UploadPage).catch();
+  };
+
+  viewMedia = (item) => {
+    console.log(item);
+    this.navCtrl.push(PlayerPage, {
+      item: item
+    }).catch();
   };
 }

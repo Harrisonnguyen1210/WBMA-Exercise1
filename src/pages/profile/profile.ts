@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { Pic, User } from '../../interface/pic';
+import { MyFilePage } from '../myfile/myfile';
 
 @Component({
   selector: 'page-profile',
@@ -19,6 +20,7 @@ export class ProfilePage {
       this.requestUserInfo();
     }
   }
+
   url = 'https://media.mw.metropolia.fi/wbma/uploads/';
   username: string;
   email: string;
@@ -30,17 +32,21 @@ export class ProfilePage {
     console.log(this.username, this.email);
     this.mediaProvider.getUserAvatar().subscribe((res: Pic[]) => {
       res.forEach(avatar => {
-        if(avatar.user_id.toString() === localStorage.getItem('user_id')){
+        if (avatar.user_id.toString() === localStorage.getItem('user_id')) {
           this.avatar = avatar;
         }
-      })
-    })
+      });
+    });
   };
 
   logout = () => {
     this.mediaProvider.isLoggedIn = false;
     localStorage.removeItem('token');
     this.navCtrl.parent.select(1);
+  };
+
+  goToMyFiles = () => {
+    this.navCtrl.push(MyFilePage).catch();
   };
 
 }

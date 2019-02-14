@@ -1,0 +1,30 @@
+<!--
+  Generated template for the MyfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>myfile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let item of fileArray | async">
+      <ion-thumbnail item-start>
+        <img [src]="(item.file_id | thumbnail: 'small' | async)">
+      </ion-thumbnail>
+      <h2>{{item.title}}</h2>
+      <p>{{item.time_added | date: 'dd/MM/yy'}}</p>
+      <p>{{item.description}}</p>
+      <button ion-button (click)="viewMedia(item)">View</button>
+      <button ion-button (click)="modifyMedia(item)">Modify</button>
+      <button ion-button (click)="deleteMedia(item.file_id)">Delete</button>
+    </ion-item>
+  </ion-list>
+</ion-content>
